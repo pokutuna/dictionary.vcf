@@ -1,5 +1,4 @@
 Docker,どっかー
-Dockerfile,どっかーふぁいる
 docker build,どっかーびるど
 docker compose,どっかーこんぽーず
 docker compose down,どっかーこんぽーずだうん
@@ -18,3 +17,4 @@ docker run,どっかーらん
 docker stop,どっかーすとっぷ
 docker tag,どっかーたぐ
 docker volume,どっかーぼりゅーむ
+Dockerfile,どっかーふぁいる

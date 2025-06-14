@@ -1,6 +1,11 @@
+children,ちるどれん
+Component,こんぽーねんと
+Error Boundary,えらーばうんだり
+jsx,じぇーえすえっくす
+props,ぷろっぷす
 React,りあくと
 ReactDOM,りあくとどーえむ
-jsx,じぇーえすえっくす
+reducer,りでゅーさー
 tsx,てぃーえすえっくす
 useCallback,ゆーずこーるばっく
 useContext,ゆーずこんてきすと
@@ -9,8 +14,3 @@ useMemo,ゆーずめも
 useReducer,ゆーずりでゅーさー
 useRef,ゆーずれふ
 useState,ゆーずすてーと
-reducer,りでゅーさー
-children,ちるどれん
-props,ぷろっぷす
-Component,こんぽーねんと
-Error Boundary,えらーばうんだり
