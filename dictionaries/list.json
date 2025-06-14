@@ -1,110 +1,101 @@
 {
   "categories": [
     {
-      "id": "lang",
-      "name": "プログラミング言語",
-      "description": "言語固有の用語とフレームワーク",
+      "id": "general",
+      "name": "汎用",
+      "description": "いろいろなところで登場する概念や用語",
       "dictionaries": [
         {
-          "name": "lang-python",
-          "displayName": "Python",
-          "description": "Python言語の用語、ライブラリ、フレームワーク"
+          "name": "vocab-commands",
+          "displayName": "各種コマンド"
         },
         {
+          "name": "vocab-misc",
+          "displayName": "Web 開発"
+        }
+      ]
+    },
+    {
+      "id": "lang",
+      "name": "プログラミング言語",
+      "description": "言語ごとの構文・予約語・ツール・ライブラリなど",
+      "dictionaries": [
+        {
           "name": "lang-typescript",
-          "displayName": "TypeScript/JavaScript",
-          "description": "TypeScriptとJavaScript言語の機能とエコシステム"
+          "displayName": "TypeScript / JavaScript"
+        },
+        {
+          "name": "lang-python",
+          "displayName": "Python"
         },
         {
           "name": "lang-go",
-          "displayName": "Go",
-          "description": "Go言語の用語、標準ライブラリ、フレームワーク"
-        },
-        {
-          "name": "lang-sql",
-          "displayName": "SQL",
-          "description": "SQL構文、関数、データベース管理システム"
+          "displayName": "Go"
         },
         {
           "name": "lang-rust",
-          "displayName": "Rust",
-          "description": "Rust言語の用語、所有権、ライフタイム、cargo"
+          "displayName": "Rust"
+        },
+        {
+          "name": "lang-sql",
+          "displayName": "SQL"
         }
       ]
     },
     {
       "id": "lib",
       "name": "ライブラリ・フレームワーク",
-      "description": "特定のライブラリとフレームワークの専門用語",
+      "description": "特定のライブラリ中に登場する用語・関数名",
       "dictionaries": [
         {
           "name": "lib-react",
-          "displayName": "React",
-          "description": "Reactライブラリ固有の用語とフック"
+          "displayName": "React"
         }
       ]
     },
     {
       "id": "tool",
       "name": "開発ツール",
-      "description": "コマンドラインツールと開発ユーティリティ",
+      "description": "特定ツールでの用語やコマンド",
       "dictionaries": [
         {
-          "name": "tool-docker",
-          "displayName": "Docker",
-          "description": "Dockerコマンドとコンテナ関連用語"
-        },
-        {
           "name": "tool-git",
-          "displayName": "Git",
-          "description": "Gitバージョン管理のコマンドと概念"
+          "displayName": "Git"
         },
         {
-          "name": "tool-terraform",
-          "displayName": "Terraform",
-          "description": "TerraformによるInfrastructure as Code"
-        },
-        {
-          "name": "tool-gcp",
-          "displayName": "Google Cloud Platform",
-          "description": "GCPサービス、gcloudコマンド、クラウドリソース"
+          "name": "tool-docker",
+          "displayName": "Docker"
         },
         {
           "name": "tool-kubernetes",
-          "displayName": "Kubernetes",
-          "description": "Kubernetesクラスタ管理、kubectl、pod、サービス"
+          "displayName": "Kubernetes"
+        },
+        {
+          "name": "tool-terraform",
+          "displayName": "Terraform"
         }
       ]
     },
     {
-      "id": "vocab",
-      "name": "一般用語",
-      "description": "ドメイン固有の用語と概念",
+      "id": "domain",
+      "name": "分野",
+      "description": "特定分野の単語",
       "dictionaries": [
         {
           "name": "vocab-ai",
-          "displayName": "AI・機械学習",
-          "description": "人工知能と機械学習の専門用語"
-        },
-        {
-          "name": "vocab-commands",
-          "displayName": "コマンドライン",
-          "description": "一般的なコマンドラインユーティリティと操作"
-        },
-        {
-          "name": "vocab-misc",
-          "displayName": "その他",
-          "description": "プログラミング関連のその他の用語と概念"
-        },
-        {
-          "name": "vocab-devops",
-          "displayName": "DevOps",
-          "description": "DevOps、CI/CD、監視、オブザーバビリティ"
+          "displayName": "AI"
         },
         {
           "name": "vocab-mobile",
-          "displayName": "モバイル開発",
-          "description": "iOS、Android、React Native、Flutter、モバイルアプリ開発"
+          "displayName": "モバイル開発"
+        },
+        {
+          "name": "vocab-devops",
+          "displayName": "DevOps"
+        },
+        {
+          "name": "vocab-googlecloud",
+          "displayName": "Google Cloud"
         }
       ]
     }

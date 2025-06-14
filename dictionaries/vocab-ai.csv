@@ -1,4 +1,4 @@
-anthropic,あんとろぴっく
+anthropic,あんすろぴっく
 ChatGPT,ちゃっとじーぴーてぃー
 Claude,くろーど
 CoT,しーおーてぃー
@@ -9,19 +9,19 @@ GPT,じーぴーてぃー
 Hugging Face,はぎんぐふぇいす
 LangChain,らんぐちぇいん
 LangGraph,らんぐぐらふ
+Llama,らま
 LLM,えるえるえむ
 o3,おーすりー
+ollama,おーらま
 OpenAI,おーぷんえーあい
 opus,おーぱす
 prompt,ぷろんぷと
+PyTorch,ぱいとーち
 RAG,らぐ
 reasoning,りーずにんぐ
 sonnet,そねっと
 temperature,てんぺらちゃー
-VertexAI,ばーてっくすえーあい
-Llama,らま
-ollama,おーらま
-PyTorch,ぱいとーち
 torch,とーち
 transformers,とらんすふぉーまーず
+VertexAI,ばーてっくすえーあい
 vLLM,ぶいえるえるえむ

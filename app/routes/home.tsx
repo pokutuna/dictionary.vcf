@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, Github } from "lucide-react";
 import type { Route } from "./+types/home";
 import type { Dictionary, Category, DictionaryList } from "../types";
 import { generateVCF, downloadVCF } from "../vcf";
@@ -15,7 +15,8 @@ export function meta({}: Route.MetaArgs) {
     { title: "macOS 音声入力向け辞書 | dictionary.vcf" },
     {
       name: "description",
-      content: "プログラミング用語の辞書をVCFファイルとして出力し、macOS音声入力の認識を向上させます",
+      content:
+        "プログラミング用語の辞書をVCFファイルとして出力し、macOS音声入力の認識を向上させます",
     },
   ];
 }
@@ -145,7 +146,6 @@ export default function Home() {
     );
   };
 
-
   const updateReading = (
     dictName: string,
     entryId: string,
@@ -194,12 +194,12 @@ export default function Home() {
     (sum, dict) => sum + dict.entries.filter((e) => e.selected).length,
     0
   );
-  
+
   const totalEntries = dictionaries.reduce(
     (sum, dict) => sum + dict.entries.length,
     0
   );
-  
+
   const allSelected = totalSelectedEntries === totalEntries && totalEntries > 0;
 
   if (loading) {
@@ -209,29 +209,36 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gray-50 py-6 px-4">
       <div className="max-w-4xl mx-auto">
-        {/* Header */}
-        <header className="mb-6">
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
-            <h1 className="text-2xl font-bold text-gray-900 mb-2">
-              macOS音声入力向け辞書ジェネレーター
+        {/* Header & Action Bar */}
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 mb-4">
+          {/* Header Section */}
+          <div className="text-center mb-6">
+            <h1 className="text-2xl font-bold text-gray-900 m-4">
+              macOS 音声入力用連絡先ジェネレーター
             </h1>
-            <p className="text-gray-600 mb-3">
-              プログラミング用語の辞書をVCFファイルとして出力し、macOS音声入力の認識を向上させます
+            <p className="text-gray-600 mb-2">
+              認識されにくい用語を連絡先に追加することで音声入力を改善しよう
+              <br />
+              連絡先はメチャクチャになります
             </p>
             <a
               href="https://github.com/pokutuna/dictionary.vcf"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-blue-600 hover:text-blue-800 text-sm font-medium"
+              className="inline-flex items-center gap-1 text-xs text-gray-500 hover:text-gray-700 transition-colors"
             >
-              <ExternalLink size={14} />
-              GitHub
+              GitHub: pokutuna/dictionary.vcf
+              <ExternalLink size={12} />
             </a>
           </div>
-        </header>
 
-        {/* Action Bar */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 mb-4">
+          {/* 説明文 */}
+          <div className="text-sm text-blue-700 bg-blue-50 border border-blue-200 rounded px-3 py-2 mb-4">
+            💡
+            連絡先に含める辞書・単語の選択、音声入力の際のよみがなの編集ができます
+          </div>
+
+          {/* Action Bar */}
           <div className="flex items-start justify-between gap-4">
             {/* 左側: 選択操作とその下に統計情報 */}
             <div className="flex flex-col gap-2">
@@ -244,7 +251,7 @@ export default function Home() {
                   <span className="text-xs">☑</span>
                   すべて選択
                 </button>
-                
+
                 <button
                   onClick={handleDeselectAll}
                   disabled={totalSelectedEntries === 0}
@@ -254,7 +261,7 @@ export default function Home() {
                   すべて解除
                 </button>
               </div>
-              
+
               {/* 統計情報を選択ボタンの下に */}
               <div className="text-sm text-gray-600">
                 <StatsDisplay
@@ -271,7 +278,7 @@ export default function Home() {
               className="flex items-center gap-3 px-6 py-4 bg-green-600 text-white rounded-lg hover:bg-green-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors font-semibold text-lg"
             >
               <span className="text-xl">⬇</span>
-              辞書をダウンロード
+              連絡先 (.vcf) をダウンロード
             </button>
           </div>
         </div>
@@ -306,6 +313,28 @@ export default function Home() {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Footer - 追加歓迎メッセージ */}
+        <div className="text-center py-12 mt-12 border-t border-gray-200">
+          <p className="text-gray-700 text-lg mb-3 font-medium">
+            辞書や単語が足りない？
+          </p>
+          <p className="text-gray-600 text-base mb-4">
+            Pull Request での追加・修正を歓迎しています！
+          </p>
+          <p className="text-gray-500 text-sm">
+            <a
+              href="https://github.com/pokutuna/dictionary.vcf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 text-blue-600 hover:text-blue-700 underline font-medium"
+            >
+              <Github size={16} />
+              GitHub リポジトリはこちら
+              <ExternalLink size={14} />
+            </a>
+          </p>
         </div>
       </div>
     </div>

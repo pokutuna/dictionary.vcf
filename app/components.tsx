@@ -1,4 +1,11 @@
-import { Download, ChevronDown, ChevronUp, Edit3, CheckSquare, Square } from "lucide-react";
+import {
+  Download,
+  ChevronDown,
+  ChevronUp,
+  Edit3,
+  CheckSquare,
+  Square,
+} from "lucide-react";
 import { useMemo } from "react";
 import type { Dictionary, DictionaryEntry, Category } from "./types";
 
@@ -20,7 +27,10 @@ interface StatsDisplayProps {
   totalSelectedEntries: number;
 }
 
-export function StatsDisplay({ selectedCount, totalSelectedEntries }: StatsDisplayProps) {
+export function StatsDisplay({
+  selectedCount,
+  totalSelectedEntries,
+}: StatsDisplayProps) {
   return (
     <div className="text-sm text-gray-600">
       {selectedCount} 個の辞書を選択 • {totalSelectedEntries} 個の単語を選択
@@ -36,12 +46,12 @@ interface ActionButtonsProps {
   allSelected: boolean;
 }
 
-export function ActionButtons({ 
-  onGenerateVCF, 
-  totalSelectedEntries, 
-  onSelectAll, 
-  onDeselectAll, 
-  allSelected 
+export function ActionButtons({
+  onGenerateVCF,
+  totalSelectedEntries,
+  onSelectAll,
+  onDeselectAll,
+  allSelected,
 }: ActionButtonsProps) {
   return (
     <div className="flex items-center justify-between w-full">
@@ -55,7 +65,7 @@ export function ActionButtons({
           <CheckSquare size={14} />
           すべて選択
         </button>
-        
+
         <button
           onClick={onDeselectAll}
           disabled={totalSelectedEntries === 0}
@@ -88,7 +98,9 @@ export function CategoryHeader({ category }: CategoryHeaderProps) {
     <div className="border-b border-gray-200 pb-2">
       <h2 className="text-lg font-semibold text-gray-900">
         {category.name}
-        <span className="text-sm text-gray-600 font-normal ml-2">{category.description}</span>
+        <span className="text-sm text-gray-600 font-normal ml-2">
+          {category.description}
+        </span>
       </h2>
     </div>
   );
@@ -98,7 +110,11 @@ interface DictionaryEntryComponentProps {
   entry: DictionaryEntry;
   dictName: string;
   onToggle: (dictName: string, entryId: string) => void;
-  onUpdateReading: (dictName: string, entryId: string, newReading: string) => void;
+  onUpdateReading: (
+    dictName: string,
+    entryId: string,
+    newReading: string
+  ) => void;
 }
 
 export function DictionaryEntryComponent({
@@ -108,7 +124,7 @@ export function DictionaryEntryComponent({
   onUpdateReading,
 }: DictionaryEntryComponentProps) {
   const isModified = entry.reading !== entry.originalReading;
-  
+
   return (
     <div className="flex items-center gap-3 p-2 bg-gray-50 rounded ml-11">
       <input
@@ -127,16 +143,19 @@ export function DictionaryEntryComponent({
           <input
             type="text"
             value={entry.reading}
-            onChange={(e) => onUpdateReading(dictName, entry.id, e.target.value)}
+            onChange={(e) =>
+              onUpdateReading(dictName, entry.id, e.target.value)
+            }
             className={`text-sm border rounded px-2 py-1 pr-8 w-full focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
-              isModified 
-                ? 'border-orange-300 bg-orange-50' 
-                : 'border-gray-300'
+              isModified ? "border-orange-300 bg-orange-50" : "border-gray-300"
             }`}
             placeholder="読み仮名"
           />
           {isModified && (
-            <Edit3 size={14} className="absolute right-2 top-1/2 transform -translate-y-1/2 text-orange-500" />
+            <Edit3
+              size={14}
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 text-orange-500"
+            />
           )}
         </div>
       </div>
@@ -150,7 +169,11 @@ interface DictionaryCardProps {
   onToggleDictionary: (name: string) => void;
   onToggleExpanded: (name: string) => void;
   onToggleEntry: (dictName: string, entryId: string) => void;
-  onUpdateReading: (dictName: string, entryId: string, newReading: string) => void;
+  onUpdateReading: (
+    dictName: string,
+    entryId: string,
+    newReading: string
+  ) => void;
 }
 
 export function DictionaryCard({
@@ -164,22 +187,24 @@ export function DictionaryCard({
   // ランダムワードを辞書名をキーにしてメモ化
   const randomWords = useMemo(() => {
     if (dict.entries.length === 0) return [];
-    
+
     // 辞書名をシードとして使用して一貫したランダム順序を生成
     let seed = 0;
     for (let i = 0; i < dict.name.length; i++) {
       seed += dict.name.charCodeAt(i);
     }
-    
+
     const shuffled = [...dict.entries].sort((a, b) => {
       const aHash = (seed + a.word.length) % 1000;
       const bHash = (seed + b.word.length) % 1000;
       return aHash - bHash;
     });
-    
-    return shuffled.slice(0, Math.min(10, dict.entries.length)).map(e => e.word);
+
+    return shuffled
+      .slice(0, Math.min(10, dict.entries.length))
+      .map((e) => e.word);
   }, [dict.name, dict.entries.length]);
-  
+
   return (
     <div className="bg-white rounded-lg shadow-sm border border-gray-200">
       <div className="p-3">
@@ -194,9 +219,9 @@ export function DictionaryCard({
               onClick={(e) => e.stopPropagation()}
             />
           </div>
-          
+
           {/* 辞書情報をクリックで開閉 */}
-          <div 
+          <div
             className="flex-1 min-w-0 cursor-pointer hover:bg-gray-50 rounded p-2 -m-2"
             onClick={() => onToggleExpanded(dict.name)}
           >
@@ -210,17 +235,21 @@ export function DictionaryCard({
                     {dict.entries.length}語
                   </span>
                 </div>
-                
+
                 {/* ランダムな単語を表示 */}
                 <div className="text-xs text-gray-600 truncate">
-                  {randomWords.join(', ')}
-                  {dict.entries.length > 10 && ', ...'}
+                  {randomWords.join(", ")}
+                  {dict.entries.length > 10 && ", ..."}
                 </div>
               </div>
-              
+
               {/* 開閉アイコン */}
               <div className="flex-shrink-0 ml-2">
-                {isExpanded ? <ChevronUp size={16} className="text-gray-400" /> : <ChevronDown size={16} className="text-gray-400" />}
+                {isExpanded ? (
+                  <ChevronUp size={16} className="text-gray-400" />
+                ) : (
+                  <ChevronDown size={16} className="text-gray-400" />
+                )}
               </div>
             </div>
           </div>
