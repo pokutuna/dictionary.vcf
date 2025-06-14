@@ -1,18 +1,30 @@
+__init__,あんだーばーいにっと
+__main__,あんだーばーめいん
 asyncio,えいしんくあいおー
 contextmanager,こんてきすとまねーじゃ
 dataclass,でーたくらす
 dict,でぃくと
 enumerate,いにゅめれーと
 FastAPI,ふぁすとえーぴーあい
+flask,ふらすく
 Jupyter,じゅぴたー
+kwargs,きーわーぐす
+lambda,らむだ
+matplotlib,まっとぷろっとりぶ
+mypy,まいぱい
 numpy,なむぱい
 pandas,ぱんだす
 pip,ぴっぷ
 polars,ぽーらす
 pyproject,ぱいぷろじぇくと
 pytest,ぱいてすと
-PyTorch,ぱいとーち
+requests,りくえすつ
 requirements,りくわいあめんつ
+ruff,らふ
+sklearn,えすけーらーん
+tuple,たぷる
 uv,ゆーぶい
+uv add,ゆーぶいあど
+uv sync,ゆーぶいしんく
 venv,ぶいえんぶ
 virtualenv,ばーちゃるえんぶ

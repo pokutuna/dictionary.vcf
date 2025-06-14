@@ -2,74 +2,109 @@
   "categories": [
     {
       "id": "lang",
-      "name": "Programming Languages",
-      "description": "Language-specific terms and frameworks",
+      "name": "プログラミング言語",
+      "description": "言語固有の用語とフレームワーク",
       "dictionaries": [
         {
           "name": "lang-python",
           "displayName": "Python",
-          "description": "Python language terms, libraries, and frameworks"
+          "description": "Python言語の用語、ライブラリ、フレームワーク"
         },
         {
           "name": "lang-typescript",
           "displayName": "TypeScript/JavaScript",
-          "description": "TypeScript and JavaScript language features and ecosystem"
+          "description": "TypeScriptとJavaScript言語の機能とエコシステム"
+        },
+        {
+          "name": "lang-go",
+          "displayName": "Go",
+          "description": "Go言語の用語、標準ライブラリ、フレームワーク"
+        },
+        {
+          "name": "lang-sql",
+          "displayName": "SQL",
+          "description": "SQL構文、関数、データベース管理システム"
+        },
+        {
+          "name": "lang-rust",
+          "displayName": "Rust",
+          "description": "Rust言語の用語、所有権、ライフタイム、cargo"
         }
       ]
     },
     {
       "id": "lib",
-      "name": "Libraries & Frameworks",
-      "description": "Specific library and framework terminology",
+      "name": "ライブラリ・フレームワーク",
+      "description": "特定のライブラリとフレームワークの専門用語",
       "dictionaries": [
         {
           "name": "lib-react",
           "displayName": "React",
-          "description": "React library-specific terms and hooks"
+          "description": "Reactライブラリ固有の用語とフック"
         }
       ]
     },
     {
       "id": "tool",
-      "name": "Development Tools",
-      "description": "Command-line tools and development utilities",
+      "name": "開発ツール",
+      "description": "コマンドラインツールと開発ユーティリティ",
       "dictionaries": [
         {
           "name": "tool-docker",
           "displayName": "Docker",
-          "description": "Docker commands and container terminology"
+          "description": "Dockerコマンドとコンテナ関連用語"
         },
         {
           "name": "tool-git",
           "displayName": "Git",
-          "description": "Git version control commands and concepts"
+          "description": "Gitバージョン管理のコマンドと概念"
         },
         {
           "name": "tool-terraform",
           "displayName": "Terraform",
-          "description": "Infrastructure as Code with Terraform"
+          "description": "TerraformによるInfrastructure as Code"
+        },
+        {
+          "name": "tool-gcp",
+          "displayName": "Google Cloud Platform",
+          "description": "GCPサービス、gcloudコマンド、クラウドリソース"
+        },
+        {
+          "name": "tool-kubernetes",
+          "displayName": "Kubernetes",
+          "description": "Kubernetesクラスタ管理、kubectl、pod、サービス"
         }
       ]
     },
     {
       "id": "vocab",
-      "name": "General Vocabulary",
-      "description": "Domain-specific terms and concepts",
+      "name": "一般用語",
+      "description": "ドメイン固有の用語と概念",
       "dictionaries": [
         {
           "name": "vocab-ai",
-          "displayName": "AI & Machine Learning",
-          "description": "Artificial intelligence and machine learning terminology"
+          "displayName": "AI・機械学習",
+          "description": "人工知能と機械学習の専門用語"
         },
         {
           "name": "vocab-commands",
-          "displayName": "Command Line",
-          "description": "General command-line utilities and operations"
+          "displayName": "コマンドライン",
+          "description": "一般的なコマンドラインユーティリティと操作"
         },
         {
           "name": "vocab-misc",
-          "displayName": "Miscellaneous",
-          "description": "Other programming-related terms and concepts"
+          "displayName": "その他",
+          "description": "プログラミング関連のその他の用語と概念"
+        },
+        {
+          "name": "vocab-devops",
+          "displayName": "DevOps",
+          "description": "DevOps、CI/CD、監視、オブザーバビリティ"
+        },
+        {
+          "name": "vocab-mobile",
+          "displayName": "モバイル開発",
+          "description": "iOS、Android、React Native、Flutter、モバイルアプリ開発"
         }
       ]
     }

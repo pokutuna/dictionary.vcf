@@ -1,16 +1,21 @@
 children,ちるどれん
 Component,こんぽーねんと
 Error Boundary,えらーばうんだり
+hooks,ふっくす
 jsx,じぇーえすえっくす
 props,ぷろっぷす
 React,りあくと
 ReactDOM,りあくとどーえむ
 reducer,りでゅーさー
+Suspence,さすぺんす
 tsx,てぃーえすえっくす
 useCallback,ゆーずこーるばっく
 useContext,ゆーずこんてきすと
 useEffect,ゆーずえふぇくと
+useLayoutEffect,ゆーずれいあうとえふぇくと
 useMemo,ゆーずめも
+useQuery,ゆーずくえりー
 useReducer,ゆーずりでゅーさー
 useRef,ゆーずれふ
 useState,ゆーずすてーと
+useTransition,ゆーずとらんじしょん

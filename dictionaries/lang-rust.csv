@@ -1,0 +1,33 @@
+async,あしんく
+await,あうぇいと
+borrowing,ぼろーいんぐ
+cargo,かーご
+cargo build,かーごびるど
+cargo run,かーごらん
+cargo test,かーごてすと
+clone,くろーん
+crate,くれーと
+derive,でらいぶ
+enum,いーなむ
+futures,ふゅーちゃーず
+impl,いんぷる
+lifetime,らいふたいむ
+macro,まくろ
+match,まっち
+move,むーぶ
+mut,みゅーと
+Option,おぷしょん
+ownership,おーなーしっぷ
+panic,ぱにっく
+pub,ぱぶ
+Result,りざると
+rustc,らすとしー
+rustfmt,らすとふぉーまっと
+rustup,らすとあっぷ
+serde,さーで
+Some,さむ
+struct,すとらくと
+trait,とれいと
+unwrap,あんらっぷ
+vec,べっく
+where,うぇあ
