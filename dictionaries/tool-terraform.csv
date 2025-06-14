@@ -1,6 +1,10 @@
+.tf,どっとてぃーえふ
 data resource,でーたりそーす
+main.tf,めいんどっとてぃーえふ
+outputs.tf,あうとぷっつどっとてぃーえふ
 resource block,りそーすぶろっく
 terraform,てらふぉーむ
 terraform apply,てらふぉーむあぷらい
 terraform plan,てらふぉーむぷらん
 tfstate,てぃーえふすてーと
+variables.tf,ばりあぶるずどっとてぃーえふ

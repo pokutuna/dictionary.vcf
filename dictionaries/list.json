@@ -1,75 +1,101 @@
 {
   "categories": [
     {
-      "id": "lang",
-      "name": "Programming Languages",
-      "description": "Language-specific terms and frameworks",
+      "id": "general",
+      "name": "汎用",
+      "description": "いろいろなところで登場する概念や用語",
       "dictionaries": [
         {
-          "name": "lang-python",
-          "displayName": "Python",
-          "description": "Python language terms, libraries, and frameworks"
+          "name": "vocab-commands",
+          "displayName": "各種コマンド"
         },
         {
+          "name": "vocab-misc",
+          "displayName": "Web 開発"
+        }
+      ]
+    },
+    {
+      "id": "lang",
+      "name": "プログラミング言語",
+      "description": "言語ごとの構文・予約語・ツール・ライブラリなど",
+      "dictionaries": [
+        {
           "name": "lang-typescript",
-          "displayName": "TypeScript/JavaScript",
-          "description": "TypeScript and JavaScript language features and ecosystem"
+          "displayName": "TypeScript / JavaScript"
+        },
+        {
+          "name": "lang-python",
+          "displayName": "Python"
+        },
+        {
+          "name": "lang-go",
+          "displayName": "Go"
+        },
+        {
+          "name": "lang-rust",
+          "displayName": "Rust"
+        },
+        {
+          "name": "lang-sql",
+          "displayName": "SQL"
         }
       ]
     },
     {
       "id": "lib",
-      "name": "Libraries & Frameworks",
-      "description": "Specific library and framework terminology",
+      "name": "ライブラリ・フレームワーク",
+      "description": "特定のライブラリ中に登場する用語・関数名",
       "dictionaries": [
         {
           "name": "lib-react",
-          "displayName": "React",
-          "description": "React library-specific terms and hooks"
+          "displayName": "React"
         }
       ]
     },
     {
       "id": "tool",
-      "name": "Development Tools",
-      "description": "Command-line tools and development utilities",
+      "name": "開発ツール",
+      "description": "特定ツールでの用語やコマンド",
       "dictionaries": [
         {
-          "name": "tool-docker",
-          "displayName": "Docker",
-          "description": "Docker commands and container terminology"
+          "name": "tool-git",
+          "displayName": "Git"
         },
         {
-          "name": "tool-git",
-          "displayName": "Git",
-          "description": "Git version control commands and concepts"
+          "name": "tool-docker",
+          "displayName": "Docker"
+        },
+        {
+          "name": "tool-kubernetes",
+          "displayName": "Kubernetes"
         },
         {
           "name": "tool-terraform",
-          "displayName": "Terraform",
-          "description": "Infrastructure as Code with Terraform"
+          "displayName": "Terraform"
         }
       ]
     },
     {
-      "id": "vocab",
-      "name": "General Vocabulary",
-      "description": "Domain-specific terms and concepts",
+      "id": "domain",
+      "name": "分野",
+      "description": "特定分野の単語",
       "dictionaries": [
         {
           "name": "vocab-ai",
-          "displayName": "AI & Machine Learning",
-          "description": "Artificial intelligence and machine learning terminology"
+          "displayName": "AI"
         },
         {
-          "name": "vocab-commands",
-          "displayName": "Command Line",
-          "description": "General command-line utilities and operations"
+          "name": "vocab-mobile",
+          "displayName": "モバイル開発"
         },
         {
-          "name": "vocab-misc",
-          "displayName": "Miscellaneous",
-          "description": "Other programming-related terms and concepts"
+          "name": "vocab-devops",
+          "displayName": "DevOps"
+        },
+        {
+          "name": "vocab-googlecloud",
+          "displayName": "Google Cloud"
         }
       ]
     }

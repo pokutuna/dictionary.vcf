@@ -1,3 +1,4 @@
+.gitignore,どっとぎっといぐのあ
 amend,あめんど
 cherry-pick,ちぇりーぴっく
 fixup,ふぃくすあっぷ
@@ -20,5 +21,8 @@ git stash,ぎっとすたっしゅ
 git status,ぎっとすてーたす
 git switch,ぎっとすいっち
 github,ぎっとはぶ
+GitHub Actions,ぎっとはぶあくしょんず
 issue,いしゅー
 rebase,りべーす
+repository,りぽじとりー
+working directory,わーきんぐでぃれくとりー

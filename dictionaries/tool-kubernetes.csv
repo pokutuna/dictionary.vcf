@@ -1,0 +1,14 @@
+ConfigMap,こんふぃぐまっぷ
+CronJob,くろんじょぶ
+Deployment,でぷろいめんと
+Ingress,いんぐれす
+kubectl,きゅーぶしーてぃーえる
+Kubernetes,くばねてぃす
+namespace,ねーむすぺーす
+PersistentVolume,ぱーしすてんとぼりゅーむ
+pod,ぽっど
+ReplicaSet,れぷりかせっと
+Secret,しーくれっと
+ServiceAccount,さーびすあかうんと
+StatefulSet,すてーとふるせっと
+volume,ぼりゅーむ

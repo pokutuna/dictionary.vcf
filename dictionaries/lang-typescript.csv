@@ -9,15 +9,16 @@ export,えくすぽーと
 function,ふぁんくしょん
 import,いんぽーと
 interface,いんたーふぇーす
-json,じぇーそん
 Next.js,ねくすとじぇーえす
 node,のーど
 npm,えぬぴーえむ
 package.json,ぱっけーじじぇーそん
 pnpm,ぴーえぬぴーえむ
 Prettier,ぷりてぃあ
+Prisma,ぷりずま
 Promise,ぷろみす
 require,りくわいあ
+tsconfig.json,てぃーえすこんふぃぐ
 type,たいぷ
 TypeScript,たいぷすくりぷと
 undefined,あんでふぁいんど
