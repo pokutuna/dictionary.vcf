@@ -1,2 +1,16 @@
 React,りあくと
+ReactDOM,りあくとどーえむ
+jsx,じぇーえすえっくす
+tsx,てぃーえすえっくす
+useCallback,ゆーずこーるばっく
+useContext,ゆーずこんてきすと
 useEffect,ゆーずえふぇくと
+useMemo,ゆーずめも
+useReducer,ゆーずりでゅーさー
+useRef,ゆーずれふ
+useState,ゆーずすてーと
+reducer,りでゅーさー
+children,ちるどれん
+props,ぷろっぷす
+Component,こんぽーねんと
+Error Boundary,えらーばうんだり

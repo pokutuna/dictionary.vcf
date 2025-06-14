@@ -1,8 +1,24 @@
+amend,あめんど
+cherry-pick,ちぇりーぴっく
+fixup,ふぃくすあっぷ
 git,ぎっと
+git add,ぎっとあっど
+git branch,ぎっとぶらんち
+git checkout,ぎっとちぇっくあうと
+git cherry-pick,ぎっとちぇりーぴっく
+git clone,ぎっとくろーん
 git commit,ぎっとこみっと
+git diff,ぎっとでぃふ
+git fetch,ぎっとふぇっち
+git log,ぎっとろぐ
+git merge,ぎっとまーじ
+git pull,ぎっとぷる
 git push,ぎっとぷっしゅ
-rebase,りべーす
+git rebase,ぎっとりべーす
+git reset,ぎっとりせっと
+git stash,ぎっとすたっしゅ
+git status,ぎっとすてーたす
+git switch,ぎっとすいっち
 github,ぎっとはぶ
 issue,いしゅー
-fixup,ふぃくすあっぷ
-amend,あめんど
+rebase,りべーす

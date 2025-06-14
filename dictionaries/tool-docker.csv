@@ -1,7 +1,20 @@
 Docker,どっかー
 Dockerfile,どっかーふぁいる
-docker run,どっかーらん
-docker exec,どっかーえぐぜっく
-docker pull,どっかーぷる
-docker compose,どっかーこんぽーずあっぷ
+docker build,どっかーびるど
+docker compose,どっかーこんぽーず
+docker compose down,どっかーこんぽーずだうん
 docker compose up,どっかーこんぽーずあっぷ
+docker cp,どっかーしーぴー
+docker exec,どっかーえぐぜっく
+docker image,どっかーいめーじ
+docker logs,どっかーろぐす
+docker ps,どっかーぴーえす
+docker pull,どっかーぷる
+docker push,どっかーぷっしゅ
+docker restart,どっかーりすたーと
+docker rm,どっかーあーるえむ
+docker rmi,どっかーあーるえむあい
+docker run,どっかーらん
+docker stop,どっかーすとっぷ
+docker tag,どっかーたぐ
+docker volume,どっかーぼりゅーむ
