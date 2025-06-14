@@ -3,8 +3,11 @@ import type { Route } from "./+types/home";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "Dictionary VCF Generator" },
-    { name: "description", content: "Generate VCF files from dictionary for macOS voice input" },
+    { title: "macOS 音声入力向け連絡先 | dictionary.vcf" },
+    {
+      name: "description",
+      content: "",
+    },
   ];
 }
 
@@ -15,11 +18,12 @@ export default function Home() {
         <h1 className="text-4xl font-bold text-gray-900 mb-6">
           Dictionary VCF Generator
         </h1>
-        
+
         <p className="text-lg text-gray-600 mb-8">
-          Generate vCard files from technical dictionaries to improve macOS voice input recognition for programming terms.
+          Generate vCard files from technical dictionaries to improve macOS
+          voice input recognition for programming terms.
         </p>
-        
+
         <div className="space-y-4">
           <Link
             to="/dictionaries"
@@ -27,14 +31,19 @@ export default function Home() {
           >
             Manage Dictionaries
           </Link>
-          
+
           <div className="text-sm text-gray-500">
-            <p>Select dictionaries and generate VCF files for import into macOS Contacts</p>
+            <p>
+              Select dictionaries and generate VCF files for import into macOS
+              Contacts
+            </p>
           </div>
         </div>
-        
+
         <div className="mt-12 bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">How it works</h2>
+          <h2 className="text-xl font-semibold text-gray-900 mb-4">
+            How it works
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-gray-600">
             <div>
               <div className="font-medium text-gray-900 mb-1">1. Select</div>
