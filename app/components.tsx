@@ -1,17 +1,20 @@
 import {
-  Download,
   ChevronDown,
   ChevronUp,
   Edit3,
-  CheckSquare,
-  Square,
 } from "lucide-react";
 import { useMemo } from "react";
-import type { Dictionary, DictionaryEntry, Category } from "./types";
+import type { Dictionary, DictionaryEntry, Category } from "./dictionary";
 
-interface LoadingSpinnerProps {}
+function generateRandomWords(dict: Dictionary): string[] {
+  if (dict.entries.length === 0) return [];
+  
+  const shuffled = [...dict.entries].sort(() => Math.random() - 0.5);
+  
+  return shuffled.slice(0, 10).map(e => e.word);
+}
 
-export function LoadingSpinner({}: LoadingSpinnerProps) {
+export function LoadingSpinner() {
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center">
       <div className="text-center">
@@ -38,56 +41,6 @@ export function StatsDisplay({
   );
 }
 
-interface ActionButtonsProps {
-  onGenerateVCF: () => void;
-  totalSelectedEntries: number;
-  onSelectAll: () => void;
-  onDeselectAll: () => void;
-  allSelected: boolean;
-}
-
-export function ActionButtons({
-  onGenerateVCF,
-  totalSelectedEntries,
-  onSelectAll,
-  onDeselectAll,
-  allSelected,
-}: ActionButtonsProps) {
-  return (
-    <div className="flex items-center justify-between w-full">
-      {/* 左側: 選択操作ボタン */}
-      <div className="flex gap-2">
-        <button
-          onClick={onSelectAll}
-          disabled={allSelected}
-          className="flex items-center gap-1 px-3 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors text-sm"
-        >
-          <CheckSquare size={14} />
-          すべて選択
-        </button>
-
-        <button
-          onClick={onDeselectAll}
-          disabled={totalSelectedEntries === 0}
-          className="flex items-center gap-1 px-3 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors text-sm"
-        >
-          <Square size={14} />
-          すべて解除
-        </button>
-      </div>
-
-      {/* 右側: ダウンロードボタン */}
-      <button
-        onClick={onGenerateVCF}
-        disabled={totalSelectedEntries === 0}
-        className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors font-medium"
-      >
-        <Download size={16} />
-        辞書をダウンロード
-      </button>
-    </div>
-  );
-}
 
 interface CategoryHeaderProps {
   category: Category;
@@ -109,6 +62,7 @@ export function CategoryHeader({ category }: CategoryHeaderProps) {
 interface DictionaryEntryComponentProps {
   entry: DictionaryEntry;
   dictName: string;
+  index: number;
   onToggle: (dictName: string, entryId: string) => void;
   onUpdateReading: (
     dictName: string,
@@ -120,13 +74,15 @@ interface DictionaryEntryComponentProps {
 export function DictionaryEntryComponent({
   entry,
   dictName,
+  index,
   onToggle,
   onUpdateReading,
 }: DictionaryEntryComponentProps) {
   const isModified = entry.reading !== entry.originalReading;
+  const isEven = index % 2 === 0;
 
   return (
-    <div className="flex items-center gap-3 p-2 bg-gray-50 rounded ml-11">
+    <div className={`flex items-center gap-3 p-2 rounded ml-11 ${isEven ? 'bg-gray-100' : 'bg-gray-50'}`}>
       <input
         type="checkbox"
         checked={entry.selected}
@@ -184,32 +140,12 @@ export function DictionaryCard({
   onToggleEntry,
   onUpdateReading,
 }: DictionaryCardProps) {
-  // ランダムワードを辞書名をキーにしてメモ化
-  const randomWords = useMemo(() => {
-    if (dict.entries.length === 0) return [];
-
-    // 辞書名をシードとして使用して一貫したランダム順序を生成
-    let seed = 0;
-    for (let i = 0; i < dict.name.length; i++) {
-      seed += dict.name.charCodeAt(i);
-    }
-
-    const shuffled = [...dict.entries].sort((a, b) => {
-      const aHash = (seed + a.word.length) % 1000;
-      const bHash = (seed + b.word.length) % 1000;
-      return aHash - bHash;
-    });
-
-    return shuffled
-      .slice(0, Math.min(10, dict.entries.length))
-      .map((e) => e.word);
-  }, [dict.name, dict.entries.length]);
+  const randomWords = useMemo(() => generateRandomWords(dict), [dict.name, dict.entries.length]);
 
   return (
     <div className="bg-white rounded-lg shadow-sm border border-gray-200">
       <div className="p-3">
         <div className="flex items-center gap-3">
-          {/* チェックボックス領域を広く */}
           <div className="flex items-center justify-center w-8 h-8">
             <input
               type="checkbox"
@@ -220,7 +156,6 @@ export function DictionaryCard({
             />
           </div>
 
-          {/* 辞書情報をクリックで開閉 */}
           <div
             className="flex-1 min-w-0 cursor-pointer hover:bg-gray-50 rounded p-2 -m-2"
             onClick={() => onToggleExpanded(dict.name)}
@@ -236,14 +171,12 @@ export function DictionaryCard({
                   </span>
                 </div>
 
-                {/* ランダムな単語を表示 */}
                 <div className="text-xs text-gray-600 truncate">
                   {randomWords.join(", ")}
                   {dict.entries.length > 10 && ", ..."}
                 </div>
               </div>
 
-              {/* 開閉アイコン */}
               <div className="flex-shrink-0 ml-2">
                 {isExpanded ? (
                   <ChevronUp size={16} className="text-gray-400" />
@@ -258,11 +191,12 @@ export function DictionaryCard({
         {isExpanded && (
           <div className="mt-3 pt-3 border-t border-gray-200">
             <div className="space-y-1 max-h-60 overflow-y-auto">
-              {dict.entries.map((entry) => (
+              {dict.entries.map((entry, index) => (
                 <DictionaryEntryComponent
                   key={entry.id}
                   entry={entry}
                   dictName={dict.name}
+                  index={index}
                   onToggle={onToggleEntry}
                   onUpdateReading={onUpdateReading}
                 />

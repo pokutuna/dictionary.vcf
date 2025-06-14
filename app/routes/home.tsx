@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
 import { ExternalLink, Github } from "lucide-react";
 import type { Route } from "./+types/home";
-import type { Dictionary, Category, DictionaryList } from "../types";
+import type { Category } from "../dictionary";
 import { generateVCF, downloadVCF } from "../vcf";
+import { getAllDictionaries } from "../dictionary";
+import { calculateStats } from "../utils";
+import { useDictionaryState } from "../hooks";
 import {
   LoadingSpinner,
   StatsDisplay,
@@ -21,186 +24,36 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
-async function loadDictionaryList(): Promise<DictionaryList> {
-  try {
-    const listModule = await import("../../dictionaries/list.json");
-    return listModule.default;
-  } catch (error) {
-    console.error("Failed to load dictionary list:", error);
-    return { categories: [] };
-  }
-}
-
-async function loadDictionary(name: string) {
-  try {
-    const csvModule = await import(`../../dictionaries/${name}.csv?raw`);
-    const csvText = csvModule.default;
-
-    const entries = [];
-    const lines = csvText.trim().split("\n");
-
-    for (let i = 0; i < lines.length; i++) {
-      const line = lines[i];
-      const [word, reading] = line.split(",");
-      if (word && reading) {
-        const readingValue = reading.trim();
-        entries.push({
-          word: word.trim(),
-          reading: readingValue,
-          originalReading: readingValue,
-          selected: true,
-          id: `${name}-${i}`,
-        });
-      }
-    }
-
-    return entries;
-  } catch (error) {
-    console.error(`Failed to load dictionary ${name}:`, error);
-    return [];
-  }
-}
 
 export default function Home() {
   const [categories, setCategories] = useState<Category[]>([]);
-  const [dictionaries, setDictionaries] = useState<Dictionary[]>([]);
   const [loading, setLoading] = useState(true);
   const [expandedDict, setExpandedDict] = useState<string | null>(null);
+  const {
+    dictionaries,
+    setDictionaries,
+    toggleDictionary,
+    toggleEntry,
+    updateReading,
+    selectAll,
+    deselectAll,
+  } = useDictionaryState([]);
 
   useEffect(() => {
-    async function loadDictionaries() {
-      const dictionaryList = await loadDictionaryList();
-      const dicts: Dictionary[] = [];
+    const { categories: loadedCategories, dictionaries: loadedDictionaries } = getAllDictionaries();
+    setCategories(loadedCategories);
+    setDictionaries(loadedDictionaries);
+    setLoading(false);
+  }, [setDictionaries]);
 
-      for (const category of dictionaryList.categories) {
-        for (const dictConfig of category.dictionaries) {
-          const entries = await loadDictionary(dictConfig.name);
-          dicts.push({
-            name: dictConfig.name,
-            displayName: dictConfig.displayName,
-            description: dictConfig.description,
-            entries,
-            selected: true,
-          });
-        }
-      }
-
-      setCategories(dictionaryList.categories);
-      setDictionaries(dicts);
-      setLoading(false);
-    }
-
-    loadDictionaries();
-  }, []);
-
-  const toggleDictionary = (name: string) => {
-    setDictionaries((prev) =>
-      prev.map((dict) => {
-        if (dict.name === name) {
-          const newSelected = !dict.selected;
-          const updatedEntries = dict.entries.map((entry) => ({
-            ...entry,
-            selected: newSelected,
-          }));
-          return { ...dict, selected: newSelected, entries: updatedEntries };
-        }
-        return dict;
-      })
-    );
-  };
-
-  const toggleEntry = (dictName: string, entryId: string) => {
-    setDictionaries((prev) =>
-      prev.map((dict) => {
-        if (dict.name === dictName) {
-          const updatedEntries = dict.entries.map((entry) =>
-            entry.id === entryId
-              ? { ...entry, selected: !entry.selected }
-              : entry
-          );
-
-          const allEntriesSelected = updatedEntries.every(
-            (entry) => entry.selected
-          );
-          const noEntriesSelected = updatedEntries.every(
-            (entry) => !entry.selected
-          );
-
-          let newDictSelected = dict.selected;
-          if (allEntriesSelected) {
-            newDictSelected = true;
-          } else if (noEntriesSelected) {
-            newDictSelected = false;
-          } else {
-            newDictSelected = false;
-          }
-
-          return {
-            ...dict,
-            entries: updatedEntries,
-            selected: newDictSelected,
-          };
-        }
-        return dict;
-      })
-    );
-  };
-
-  const updateReading = (
-    dictName: string,
-    entryId: string,
-    newReading: string
-  ) => {
-    setDictionaries((prev) =>
-      prev.map((dict) => {
-        if (dict.name === dictName) {
-          const updatedEntries = dict.entries.map((entry) =>
-            entry.id === entryId ? { ...entry, reading: newReading } : entry
-          );
-          return { ...dict, entries: updatedEntries };
-        }
-        return dict;
-      })
-    );
-  };
 
   const handleGenerateVCF = () => {
     const vcfContent = generateVCF(dictionaries);
     downloadVCF(vcfContent);
   };
 
-  const handleSelectAll = () => {
-    setDictionaries((prev) =>
-      prev.map((dict) => ({
-        ...dict,
-        selected: true,
-        entries: dict.entries.map((entry) => ({ ...entry, selected: true })),
-      }))
-    );
-  };
 
-  const handleDeselectAll = () => {
-    setDictionaries((prev) =>
-      prev.map((dict) => ({
-        ...dict,
-        selected: false,
-        entries: dict.entries.map((entry) => ({ ...entry, selected: false })),
-      }))
-    );
-  };
-
-  const selectedCount = dictionaries.filter((d) => d.selected).length;
-  const totalSelectedEntries = dictionaries.reduce(
-    (sum, dict) => sum + dict.entries.filter((e) => e.selected).length,
-    0
-  );
-
-  const totalEntries = dictionaries.reduce(
-    (sum, dict) => sum + dict.entries.length,
-    0
-  );
-
-  const allSelected = totalSelectedEntries === totalEntries && totalEntries > 0;
+  const { selectedCount, totalSelectedEntries, allSelected } = calculateStats(dictionaries);
 
   if (loading) {
     return <LoadingSpinner />;
@@ -209,10 +62,8 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gray-50 py-6 px-4">
       <div className="max-w-4xl mx-auto">
-        {/* Header & Action Bar */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 mb-4">
-          {/* Header Section */}
-          <div className="text-center mb-6">
+            <div className="text-center mb-6">
             <h1 className="text-2xl font-bold text-gray-900 m-4">
               macOS 音声入力用連絡先ジェネレーター
             </h1>
@@ -232,19 +83,16 @@ export default function Home() {
             </a>
           </div>
 
-          {/* 説明文 */}
           <div className="text-sm text-blue-700 bg-blue-50 border border-blue-200 rounded px-3 py-2 mb-4">
             💡
             連絡先に含める辞書・単語の選択、音声入力の際のよみがなの編集ができます
           </div>
 
-          {/* Action Bar */}
           <div className="flex items-start justify-between gap-4">
-            {/* 左側: 選択操作とその下に統計情報 */}
             <div className="flex flex-col gap-2">
               <div className="flex gap-2">
                 <button
-                  onClick={handleSelectAll}
+                  onClick={selectAll}
                   disabled={allSelected}
                   className="flex items-center gap-1 px-3 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors text-sm"
                 >
@@ -253,7 +101,7 @@ export default function Home() {
                 </button>
 
                 <button
-                  onClick={handleDeselectAll}
+                  onClick={deselectAll}
                   disabled={totalSelectedEntries === 0}
                   className="flex items-center gap-1 px-3 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors text-sm"
                 >
@@ -262,7 +110,6 @@ export default function Home() {
                 </button>
               </div>
 
-              {/* 統計情報を選択ボタンの下に */}
               <div className="text-sm text-gray-600">
                 <StatsDisplay
                   selectedCount={selectedCount}
@@ -271,7 +118,6 @@ export default function Home() {
               </div>
             </div>
 
-            {/* 右側: ダウンロードボタン（大きく） */}
             <button
               onClick={handleGenerateVCF}
               disabled={totalSelectedEntries === 0}
@@ -283,7 +129,6 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Dictionary Categories */}
         <div className="space-y-6">
           {categories.map((category) => (
             <div key={category.id} className="space-y-3">
@@ -315,7 +160,6 @@ export default function Home() {
           ))}
         </div>
 
-        {/* Footer - 追加歓迎メッセージ */}
         <div className="text-center py-12 mt-12 border-t border-gray-200">
           <p className="text-gray-700 text-lg mb-3 font-medium">
             辞書や単語が足りない？
