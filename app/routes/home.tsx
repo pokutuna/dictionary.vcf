@@ -11,6 +11,7 @@ import {
   StatsDisplay,
   CategoryHeader,
   DictionaryCard,
+  InstructionModal,
 } from "../components";
 
 export function meta({}: Route.MetaArgs) {
@@ -24,11 +25,11 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
-
 export default function Home() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
   const [expandedDict, setExpandedDict] = useState<string | null>(null);
+  const [showInstructionModal, setShowInstructionModal] = useState(false);
   const {
     dictionaries,
     setDictionaries,
@@ -40,20 +41,21 @@ export default function Home() {
   } = useDictionaryState([]);
 
   useEffect(() => {
-    const { categories: loadedCategories, dictionaries: loadedDictionaries } = getAllDictionaries();
+    const { categories: loadedCategories, dictionaries: loadedDictionaries } =
+      getAllDictionaries();
     setCategories(loadedCategories);
     setDictionaries(loadedDictionaries);
     setLoading(false);
   }, [setDictionaries]);
 
-
   const handleGenerateVCF = () => {
     const vcfContent = generateVCF(dictionaries);
     downloadVCF(vcfContent);
+    setShowInstructionModal(true);
   };
 
-
-  const { selectedCount, totalSelectedEntries, allSelected } = calculateStats(dictionaries);
+  const { selectedCount, totalSelectedEntries, allSelected } =
+    calculateStats(dictionaries);
 
   if (loading) {
     return <LoadingSpinner />;
@@ -63,7 +65,7 @@ export default function Home() {
     <div className="min-h-screen bg-gray-50 py-6 px-4">
       <div className="max-w-4xl mx-auto">
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 mb-4">
-            <div className="text-center mb-6">
+          <div className="text-center mb-6">
             <h1 className="text-2xl font-bold text-gray-900 m-4">
               macOS 音声入力用連絡先ジェネレーター
             </h1>
@@ -180,6 +182,11 @@ export default function Home() {
             </a>
           </p>
         </div>
+
+        <InstructionModal
+          isOpen={showInstructionModal}
+          onClose={() => setShowInstructionModal(false)}
+        />
       </div>
     </div>
   );

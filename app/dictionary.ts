@@ -70,7 +70,7 @@ export function getAllDictionaries(): {
       const csvPath = `../dictionaries/${dictConfig.name}.csv`;
       const csvText = csvModules[csvPath];
       
-      if (csvText) {
+      if (csvText && typeof csvText === 'string') {
         const entries = parseCsvEntries(csvText, dictConfig.name);
         dictionaries.push({
           name: dictConfig.name,
