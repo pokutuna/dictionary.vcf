@@ -12,7 +12,7 @@ export function InstructionModal({ isOpen, onClose }: InstructionModalProps) {
         <h2 className="text-xl font-bold text-gray-900 mb-4">連絡先への追加</h2>
         <div className="mb-4">
           <img
-            src="/add-remove-contacts.png"
+            src="./add-remove-contacts.png"
             alt="連絡先追加手順"
             className="w-full rounded-lg "
           />
