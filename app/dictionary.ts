@@ -57,7 +57,7 @@ function parseCsvEntries(csvText: string, dictionaryName: string): DictionaryEnt
 }
 
 // すべての辞書データを事前にimportして準備
-const csvModules = import.meta.glob("../dictionaries/*.csv", { as: "raw", eager: true });
+const csvModules = import.meta.glob("../dictionaries/*.csv", { query: "?raw", import: "default", eager: true });
 
 export function getAllDictionaries(): {
   categories: Category[];

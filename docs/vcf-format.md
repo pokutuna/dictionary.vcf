@@ -5,10 +5,14 @@
 ```
 BEGIN:VCARD
 VERSION:3.0
+PRODID:dictionary.vcf
+N:;;;;
 FN:{入力ワード}
-X-PHONETIC-LAST-NAME:{読み仮名, カタカナ}
+ORG:{入力ワード}
+X-PHONETIC-ORG:{読み仮名}
+X-ABShowAs:COMPANY
+NOTE:https://pokutuna.github.io/dictionary.vcf/
 END:VCARD
-
 ```
 
 ### 例: 3つのファイルの例を示します。
@@ -16,19 +20,34 @@ END:VCARD
 ```
 BEGIN:VCARD
 VERSION:3.0
+PRODID:dictionary.vcf
+N:;;;;
 FN:kubernetes
-X-PHONETIC-LAST-NAME:クバネテス
+ORG:kubernetes
+X-PHONETIC-ORG:クバネテス
+X-ABShowAs:COMPANY
+NOTE:https://pokutuna.github.io/dictionary.vcf/
 END:VCARD
 
 BEGIN:VCARD
 VERSION:3.0
+PRODID:dictionary.vcf
+N:;;;;
 FN:sync
-X-PHONETIC-LAST-NAME:シンク
+ORG:sync
+X-PHONETIC-ORG:シンク
+X-ABShowAs:COMPANY
+NOTE:https://pokutuna.github.io/dictionary.vcf/
 END:VCARD
 
 BEGIN:VCARD
 VERSION:3.0
+PRODID:dictionary.vcf
+N:;;;;
 FN:git commit
-X-PHONETIC-LAST-NAME:ギットコミット
+ORG:git commit
+X-PHONETIC-ORG:ギットコミット
+X-ABShowAs:COMPANY
+NOTE:https://pokutuna.github.io/dictionary.vcf/
 END:VCARD
 ```
