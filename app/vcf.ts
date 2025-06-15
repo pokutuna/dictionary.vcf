@@ -20,15 +20,27 @@ function deduplicateEntries(entries: DictionaryEntry[]): DictionaryEntry[] {
   ).sort((a, b) => a.word.localeCompare(b.word));
 }
 
+function escapeVCardValue(value: string): string {
+  // VCard specification: escape semicolons, commas, and newlines
+  return value
+    .replace(/\\/g, "\\\\") // Escape backslashes first
+    .replace(/;/g, "\\;") // Escape semicolons
+    .replace(/,/g, "\\,") // Escape commas
+    .replace(/\n/g, "\\n"); // Escape newlines
+}
+
 function createVCardString(entry: DictionaryEntry): string {
+  const word = escapeVCardValue(entry.word);
+  const reading = escapeVCardValue(entry.reading);
+
   return `
 BEGIN:VCARD
 VERSION:3.0
 PRODID:dictionary.vcf
 N:;;;;
-FN:${entry.word}
-ORG:${entry.word}
-X-PHONETIC-ORG:${entry.reading}
+FN:${word}
+ORG:${word}
+X-PHONETIC-ORG:${reading}
 X-ABShowAs:COMPANY
 NOTE:${GITHUB_PAGES_URL}
 END:VCARD
