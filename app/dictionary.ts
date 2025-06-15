@@ -57,7 +57,7 @@ function parseCsvEntries(csvText: string, dictionaryName: string): DictionaryEnt
 }
 
 // すべての辞書データを事前にimportして準備
-const csvModules = import.meta.glob("../dictionaries/*.csv", { as: "raw", eager: true });
+const csvModules = import.meta.glob("../dictionaries/*.csv", { query: "?raw", import: "default", eager: true });
 
 export function getAllDictionaries(): {
   categories: Category[];
@@ -70,7 +70,7 @@ export function getAllDictionaries(): {
       const csvPath = `../dictionaries/${dictConfig.name}.csv`;
       const csvText = csvModules[csvPath];
       
-      if (csvText) {
+      if (csvText && typeof csvText === 'string') {
         const entries = parseCsvEntries(csvText, dictConfig.name);
         dictionaries.push({
           name: dictConfig.name,

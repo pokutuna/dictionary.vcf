@@ -20,24 +20,45 @@ function deduplicateEntries(entries: DictionaryEntry[]): DictionaryEntry[] {
   ).sort((a, b) => a.word.localeCompare(b.word));
 }
 
+function escapeVCardValue(value: string): string {
+  // VCard specification: escape semicolons, commas, and newlines
+  return value
+    .replace(/\\/g, "\\\\") // Escape backslashes first
+    .replace(/;/g, "\\;") // Escape semicolons
+    .replace(/,/g, "\\,") // Escape commas
+    .replace(/\n/g, "\\n"); // Escape newlines
+}
+
 function createVCardString(entry: DictionaryEntry): string {
-  return `BEGIN:VCARD\nVERSION:3.0\nFN:${entry.word}\nX-PHONETIC-LAST-NAME:${entry.reading}\nNOTE:${GITHUB_PAGES_URL}\nEND:VCARD`;
+  const word = escapeVCardValue(entry.word);
+  const reading = escapeVCardValue(entry.reading);
+
+  return `
+BEGIN:VCARD
+VERSION:3.0
+PRODID:dictionary.vcf
+N:;;;;
+FN:${word}
+ORG:${word}
+X-PHONETIC-ORG:${reading}
+X-ABShowAs:COMPANY
+NOTE:${GITHUB_PAGES_URL}
+END:VCARD
+`.trim();
 }
 
 export function generateVCF(dictionaries: Dictionary[]): string {
   const selectedEntries = getSelectedEntries(dictionaries);
   const uniqueEntries = deduplicateEntries(selectedEntries);
-  
-  return uniqueEntries
-    .map(createVCardString)
-    .join("\n\n");
+
+  return uniqueEntries.map(createVCardString).join("\n\n");
 }
 
 export function downloadVCF(content: string) {
   const now = new Date();
-  const timestamp = now.toISOString().slice(0, 19).replace(/[:-]/g, '');
+  const timestamp = now.toISOString().slice(0, 19).replace(/[:-]/g, "");
   const filename = `dictionary_${timestamp}.vcf`;
-  
+
   const blob = new Blob([content], { type: "text/vcard" });
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
