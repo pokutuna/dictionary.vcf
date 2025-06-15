@@ -6,6 +6,9 @@ import {
 import { useMemo } from "react";
 import type { Dictionary, DictionaryEntry, Category } from "./dictionary";
 
+export { Modal } from "./components/Modal";
+export { InstructionModal } from "./components/InstructionModal";
+
 function generateRandomWords(dict: Dictionary): string[] {
   if (dict.entries.length === 0) return [];
   
