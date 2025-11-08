@@ -56,11 +56,12 @@ npm start
 
 ### Configuring for GitHub Pages
 
-Update the `base` path in `vite.config.ts` to match your repository name:
+The template automatically detects the base path:
+- **GitHub Actions**: Uses `GITHUB_REPOSITORY` environment variable
+- **Local**: Set `VITE_BASE_PATH` in `.env` file (copy from `.env.example`)
+- **Default**: Uses `/` for root deployments
 
-```typescript
-base: mode === "production" ? "/your-repo-name/" : "/"
-```
+See `vite.config.ts` for the implementation.
 
 ## Deployment
 

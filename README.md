@@ -52,43 +52,55 @@ npm run dev
 
 ## Deployment to GitHub Pages
 
-This template is pre-configured for GitHub Pages deployment:
+This template automatically configures the base path for GitHub Pages deployment.
 
-1. Update the `base` path in `vite.config.ts` if your repository name is different
-2. Build your application:
+### Configuration Options
+
+**Option 1: Automatic (Recommended for GitHub Actions)**
+
+The template auto-detects the repository name from `GITHUB_REPOSITORY` environment variable in GitHub Actions. No configuration needed!
+
+**Option 2: Manual Configuration**
+
+For local builds or custom paths, create a `.env` file:
+
+```bash
+# For project sites (username.github.io/repo-name/)
+VITE_BASE_PATH=/your-repo-name/
+
+# For user/organization sites (username.github.io/)
+VITE_BASE_PATH=/
+```
+
+**Option 3: Using package.json repository field**
+
+The template can auto-detect from your repository URL. Add to `package.json`:
+
+```json
+{
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/username/repo-name.git"
+  }
+}
+```
+
+### Build and Deploy
 
 ```bash
 npm run build
 ```
 
-3. Deploy the `build/client` directory to GitHub Pages
+Deploy the `build/client` directory to GitHub Pages.
 
 ### Automated Deployment with GitHub Actions
 
-Create `.github/workflows/deploy.yml`:
+The repository includes `.github/workflows/deploy-pages.yml` that automatically:
+- Detects the repository name
+- Builds with the correct base path
+- Deploys to GitHub Pages
 
-```yaml
-name: Deploy to GitHub Pages
-
-on:
-  push:
-    branches: [main]
-
-jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-      - run: npm ci
-      - run: npm run build
-      - uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build/client
-```
+Just push to the `main` branch and GitHub Actions handles the rest!
 
 ## Project Structure
 
@@ -135,16 +147,15 @@ export default [
 
 This template uses Tailwind CSS v4. Customize your design system in `app/app.css`.
 
-### Updating the Base Path
+### Base Path Configuration
 
-If deploying to a GitHub Pages project site (not a user/organization site), update the base path in `vite.config.ts`:
+The template uses an intelligent base path system:
 
-```typescript
-export default defineConfig(({ mode }) => ({
-  base: mode === "production" ? "/your-repo-name/" : "/",
-  plugins: [tailwindcss(), reactRouter(), tsconfigPaths()],
-}));
-```
+1. **In GitHub Actions**: Automatically uses the repository name
+2. **Locally**: Set `VITE_BASE_PATH` in `.env` file (see `.env.example`)
+3. **Default**: Uses `/` for root deployments
+
+See the [Deployment to GitHub Pages](#deployment-to-github-pages) section for details.
 
 ## Tech Stack
 
