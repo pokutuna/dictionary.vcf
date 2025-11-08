@@ -72,19 +72,6 @@ VITE_BASE_PATH=/your-repo-name/
 VITE_BASE_PATH=/
 ```
 
-**Option 3: Using package.json repository field**
-
-The template can auto-detect from your repository URL. Add to `package.json`:
-
-```json
-{
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/username/repo-name.git"
-  }
-}
-```
-
 ### Build and Deploy
 
 ```bash
