@@ -1,23 +1,26 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to Claude Code when working with code in this repository.
 
 ## Project Overview
 
-This is a dictionary project for macOS voice input that generates vCard (.vcf) files to improve Japanese voice recognition. The system exploits how macOS voice input uses contacts from the Contacts app to create custom dictionaries for technical terms and programming vocabulary.
+This is a template repository for building single-page applications (SPAs) with React Router v7, TypeScript, and Tailwind CSS. The template is pre-configured for deployment to GitHub Pages.
 
 ## Architecture
 
-- **React Router v7 SPA**: Frontend application built with React Router for dictionary selection and vCard generation
-- **Dictionary Files**: CSV files in `dictionaries/` containing word-pronunciation pairs
-- **Build Output**: vCard format files for import into macOS Contacts
+- **React Router v7 SPA**: Frontend application built with React Router for client-side routing
+- **TypeScript**: Full type safety throughout the application
+- **Tailwind CSS v4**: Utility-first CSS framework with modern features
+- **Vite 7**: Fast build tool and development server
 
-### Key Components
+### Key Files
 
-- `dictionaries/`: Contains categorized CSV files with technical vocabulary
-- `app/`: React Router application for dictionary management
-- `docs/`: Documentation about dictionary format and vCard output format
-- Output generates vCard format with `FN` (full name) and `X-PHONETIC-LAST-NAME` fields
+- `app/routes/`: Route components (page components)
+- `app/root.tsx`: Root layout with HTML structure
+- `app/routes.ts`: Route configuration
+- `app/app.css`: Global styles and Tailwind configuration
+- `vite.config.ts`: Vite configuration (includes base path for GitHub Pages)
+- `react-router.config.ts`: React Router configuration
 
 ## Development Commands
 
@@ -25,7 +28,7 @@ This is a dictionary project for macOS voice input that generates vCard (.vcf) f
 # Start development server
 npm run dev
 
-# Build for production (configured for GitHub Pages deployment at /dictionary.vcf/)
+# Build for production
 npm run build
 
 # Type checking
@@ -38,16 +41,44 @@ npm run preview
 npm start
 ```
 
-## Dictionary Management
+## Common Development Tasks
 
-- For dictionary file guidelines, naming conventions, and content policies: `dictionaries/README.md`
-- Dictionary files are located in `dictionaries/` as CSV files with format `{category}-{domain}.csv`
+### Adding a New Route
 
-## Output Format
+1. Create a new file in `app/routes/` (e.g., `app/routes/about.tsx`)
+2. Export a default component from the file
+3. Add the route to `app/routes.ts`
 
-- For vCard format specification and examples: `docs/vcf-format.md`
-- The application generates vCard files for import into macOS Contacts to improve voice recognition
+### Updating Styles
+
+- Global styles: Edit `app/app.css`
+- Component styles: Use Tailwind utility classes directly in components
+
+### Configuring for GitHub Pages
+
+Update the `base` path in `vite.config.ts` to match your repository name:
+
+```typescript
+base: mode === "production" ? "/your-repo-name/" : "/"
+```
 
 ## Deployment
 
-Production builds are configured for GitHub Pages deployment with base path `/dictionary.vcf/` (see vite.config.ts).
+This template is configured for GitHub Pages deployment. The build output directory is `build/client/`, which should be deployed to the `gh-pages` branch or configured in repository settings.
+
+## Technology Stack
+
+- React Router v7 - Client-side routing
+- React 19 - UI library
+- TypeScript - Type safety
+- Tailwind CSS v4 - Styling
+- Vite 7 - Build tool
+- Lucide React - Icons
+
+## Best Practices
+
+- Keep route components in `app/routes/`
+- Use TypeScript types for all props and state
+- Leverage Tailwind utility classes for styling
+- Follow React Router v7 conventions for data loading and mutations
+- Use the Route.MetaArgs type for page metadata

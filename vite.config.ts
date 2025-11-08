@@ -4,6 +4,6 @@ import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig(({ mode }) => ({
-  base: mode === "production" ? "/dictionary.vcf/" : "/",
+  base: mode === "production" ? "/" : "/",
   plugins: [tailwindcss(), reactRouter(), tsconfigPaths()],
 }));

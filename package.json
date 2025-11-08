@@ -1,5 +1,7 @@
 {
-  "name": "dictionary.vcf",
+  "name": "react-router-spa-template",
+  "version": "1.0.0",
+  "description": "A modern SPA template with React Router v7, TypeScript, and Tailwind CSS, ready for GitHub Pages deployment",
   "private": true,
   "type": "module",
   "scripts": {
@@ -7,15 +9,13 @@
     "dev": "react-router dev",
     "start": "react-router-serve ./build/server/index.js",
     "typecheck": "react-router typegen && tsc",
-    "preview": "react-router build && vite preview",
-    "format": "npx tsx scripts/format.ts",
-    "check-duplicates": "npx tsx scripts/check-duplicates.ts"
+    "preview": "react-router build && vite preview"
   },
   "dependencies": {
     "@react-router/node": "^7.5.3",
     "@react-router/serve": "^7.5.3",
     "isbot": "^5.1.27",
-    "lucide-react": "^0.515.0",
+    "lucide-react": "^0.553.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-router": "^7.6.2"
@@ -23,15 +23,12 @@
   "devDependencies": {
     "@react-router/dev": "^7.5.3",
     "@tailwindcss/vite": "^4.1.4",
-    "@types/node": "^20",
+    "@types/node": "^24.10.0",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
-    "glob": "^11.0.0",
     "tailwindcss": "^4.1.4",
-    "tsx": "^4.20.3",
     "typescript": "^5.8.3",
-    "vite": "^6.3.3",
-    "vite-tsconfig-paths": "^5.1.4",
-    "vitest": "^3.2.3"
+    "vite": "^7.2.2",
+    "vite-tsconfig-paths": "^5.1.4"
   }
 }
